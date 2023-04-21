@@ -21,7 +21,8 @@
   font-family: Lato, sans-serif;
   cursor: pointer;
 }
-.text-button:hover {
+.text-button:hover,
+.text-button:focus {
   color: #3a3a3a;
 }
 .del-button {
@@ -37,7 +38,8 @@
   transform: rotateZ(45deg);
   transition: transform 200ms ease-in;
 }
-.del-button__img:hover {
+.del-button__img:hover,
+.del-button:focus > .del-button__img {
   transform: rotateZ(0);
 }
 .text-input {
