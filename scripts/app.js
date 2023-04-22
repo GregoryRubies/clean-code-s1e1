@@ -12,12 +12,19 @@ document.querySelectorAll(".task-list__item")
     v, v.classList.contains("task_incomplete") ? taskCompleted : taskIncomplete
   ));
 
+/**
+ * 
+ * @param {string} tag - tag name
+ * @param {object} attributes - attribute: values
+ * @param {string || array} content - text or list of html elements 
+ * @returns HTMLElement
+ */
 function generateNewElement(tag, attributes = null, content = null){
 
   let element = document.createElement(tag);
 
   for(let attr in attributes){
-    
+
     element.setAttribute(attr, attributes[attr]);
   }
 
@@ -34,6 +41,11 @@ function generateNewElement(tag, attributes = null, content = null){
   return element; 
 }
 
+/**
+ * 
+ * @param {string} taskText 
+ * @returns HTMLElement
+ */
 function getNewTask(taskText){
 
   return generateNewElement(
@@ -124,6 +136,11 @@ function taskIncomplete() {
   taskText.classList.remove("task__text_completed");
 }
 
+/**
+ * 
+ * @param {HTMLElement} task 
+ * @param {Function} checkBoxEventHandler 
+ */
 function bindTaskEvents(task, checkBoxEventHandler) {
 
   let 
