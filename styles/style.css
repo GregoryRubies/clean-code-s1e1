@@ -1,4 +1,4 @@
-/*page*/  
+/*page*/
 .page {
   background-color: #f8f8f8;
   color: #333;
@@ -122,7 +122,7 @@
   flex-grow: 1;
 }
 .task__input_hidd {
-  display: none
+  display: none;
 }
 /*task-list*/
 .task-list {
