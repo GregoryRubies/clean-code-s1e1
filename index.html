@@ -28,25 +28,25 @@
         <button class="task__add text-button">Add</button>
       </div>
     </section>
-    <section class="tasks tasks_todo">
+    <section class="tasks tasks_incomplete">
       <h3 class="tasks__title">Todo</h3>
-      <ul class="tasks__content task-list task-list_todo">
-        <li class="task-list__item task">
+      <ul class="tasks__content task-list task-list_incomplete">
+        <li class="task-list__item task task_incomplete">
           <input class="task__check checkbox"  type="checkbox">
           <label class="task__text label">Pay Bills</label>
           <input class="task__input task__input_hidd text-input">
           <button class="task__edit text-button">Edit</button>
           <button class="task__del del-button">
-            <img class="del-button__img" src="./images/remove.svg"  alt="delete button">
+            <img class="del-button__img" src="./images/remove.svg"  alt="">
           </button>
         </li>
-        <li class="task-list__item task task-list_todo">
+        <li class="task-list__item task task_incomplete">
           <input class="task__check checkbox"  type="checkbox">
           <label class="task__text task__text_edit label">Go Shopping</label>
           <input class="task__input text-input" value="Go Shopping">
           <button class="task__edit text-button">Edit</button>
           <button class="task__del del-button">
-            <img class="del-button__img" src="./images/remove.svg" alt="delete button">
+            <img class="del-button__img" src="./images/remove.svg" alt="">
           </button>
         </li>
       </ul>
@@ -54,13 +54,13 @@
     <section class="tasks tasks_completed">
       <h3 class="tasks__title">Completed</h3>
       <ul class="tasks__content task-list task-list_completed">
-        <li class="task-list__item task">
+        <li class="task-list__item task task_completed">
           <input class="task__check task__check_checked checkbox"  type="checkbox" checked>
-          <label class="task__text task__text_complited label">See the Doctor</label>
+          <label class="task__text task__text_completed label">See the Doctor</label>
           <input class="task__input task__input_hidd text-input">
           <button class="task__edit text-button">Edit</button>
           <button class="task__del del-button">
-            <img class="del-button__img" src="./images/remove.svg" alt="delete button">
+            <img class="del-button__img" src="./images/remove.svg" alt="">
           </button>
         </li>
       </ul>

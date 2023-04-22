@@ -109,7 +109,7 @@
   box-sizing: border-box;
   font-size: 18px;
 }
-.task__text_complited {
+.task__text_completed {
   text-decoration: line-through;
   color: #888;
 }

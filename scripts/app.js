@@ -1,31 +1,14 @@
 let 
   taskInput = document.getElementById("task-add-input"),
   addButton = document.querySelector(".task__add"),
-  incompleteTaskHolder = document.querySelector(".incomplete"),
-  completedTasksHolder = document.querySelector(".completed");
+  incompleteTaskHolder = document.querySelector(".task-list_incomplete"),
+  completedTasksHolder = document.querySelector(".task-list_completed");
 
-
-let ajaxRequest = function () {
-  console.log("AJAX Request");
-}
-
-addButton.onclick = addTask;
+addButton.addEventListener("keyEnter", addTask);
 addButton.addEventListener("click", addTask);
-addButton.addEventListener("click", ajaxRequest);
 
-//cycle over incompleteTaskHolder ul list items
-//for each list item
-//for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-
-  //bind events to list items chldren(tasksCompleted)
- // bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
-//}
-
-//cycle over completedTasksHolder ul list items 
-//for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  //bind events to list items chldren(tasksIncompleted)
-//  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
-//}
+document.querySelectorAll(".task-list__item")
+  .forEach(v => bindTaskEvents(v, Array.from(v.classList).includes("task_incomplete") ? taskCompleted : taskIncomplete));
 
 function generateNewElement(tag, attributes = null, content = null){
   let element = document.createElement(tag);
@@ -45,7 +28,7 @@ function generateNewElement(tag, attributes = null, content = null){
 function getNewTask(taskText){
   return generateNewElement(
     "li",
-    {"class":"task-list__item task"}, 
+    {"class":"task-list__item task task_incomplete"}, 
     [
       generateNewElement("input", {"class":"task__check checkbox", "type": "checkbox"}),
       generateNewElement("label", {"class":"task__text label"}, taskText),
@@ -61,15 +44,12 @@ function getNewTask(taskText){
 }
 
 function addTask() {
-  console.log("Add Task...");
-
-  if (!taskInput.value) return;
-  let listItem = getNewTask(taskInput.value);
-
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
-
-  taskInput.value = "";
+  if(!!taskInput.value){
+    let listItem = getNewTask(taskInput.value);
+    incompleteTaskHolder.append(listItem);
+    bindTaskEvents(listItem, taskCompleted);
+    taskInput.value = "";
+  }
 }
 
 function editTask() {
@@ -98,36 +78,40 @@ function editTask() {
 
 function deleteTask() {
   console.log("Delete Task...");
-
-  let listItem = this.parentNode;
-  let ul = listItem.parentNode;
-  ul.removeChild(listItem);
+  let 
+    task = this.parentNode,
+    taskList = task.parentNode;
+  taskList.removeChild(task);
 
 }
 function taskCompleted() {
-  console.log("Complete Task...");
-
-  //Append the task list item to the .completed
-  let listItem = this.parentNode;
-  completedTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
-
+  let 
+    task = this.parentNode
+    taskText = task.querySelector(".task__text");
+  completedTasksHolder.append(task);
+  bindTaskEvents(task, taskIncomplete);
+  this.classList.add("task__check_checked");
+  task.classList.remove("task_incomplete");
+  task.classList.add("task_completed");
+  taskText.classList.add("task__text_completed");
 }
 function taskIncomplete() {
-  console.log("Incomplete Task...");
-
-  let listItem = this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  let 
+    task = this.parentNode,
+    taskText = task.querySelector(".task__text");
+  incompleteTaskHolder.append(task);
+  bindTaskEvents(task, taskCompleted);
+  this.classList.remove("task__check_checked"); 
+  task.classList.remove("task_completed");
+  task.classList.add("task_incomplete");
+  taskText.classList.remove("task__text_completed");
 }
 
-function bindTaskEvents(taskListItem, checkBoxEventHandler) {
-
+function bindTaskEvents(task, checkBoxEventHandler) {
   let 
-    checkBox = taskListItem.querySelector("input[type=checkbox]"),
-    editButton = taskListItem.querySelector("button.edit"),
-    deleteButton = taskListItem.querySelector(".del-button");
-
+    checkBox = task.querySelector(".task__check"),
+    editButton = task.querySelector(".task__edit"),
+    deleteButton = task.querySelector(".task__del");
   editButton.onclick = editTask;
   deleteButton.onclick = deleteTask;
   checkBox.onchange = checkBoxEventHandler;
