@@ -8,17 +8,26 @@ addButton.addEventListener("keyEnter", addTask);
 addButton.addEventListener("click", addTask);
 
 document.querySelectorAll(".task-list__item")
-  .forEach(v => bindTaskEvents(v, Array.from(v.classList).includes("task_incomplete") ? taskCompleted : taskIncomplete));
+  .forEach(v => bindTaskEvents(
+    v, v.classList.contains("task_incomplete") ? taskCompleted : taskIncomplete
+  ));
 
 function generateNewElement(tag, attributes = null, content = null){
+
   let element = document.createElement(tag);
+
   for(let attr in attributes){
+    
     element.setAttribute(attr, attributes[attr]);
   }
+
   if(content){ 
+
     if(content.__proto__.constructor.name == "Array"){
+
       content.forEach(e => element.append(e));
     } else { 
+
       element.append(content);
     }
   }
@@ -26,6 +35,7 @@ function generateNewElement(tag, attributes = null, content = null){
 }
 
 function getNewTask(taskText){
+
   return generateNewElement(
     "li",
     {"class":"task-list__item task task_incomplete"}, 
@@ -44,10 +54,13 @@ function getNewTask(taskText){
 }
 
 function addTask() {
+
   if(!!taskInput.value){
-    let listItem = getNewTask(taskInput.value);
-    incompleteTaskHolder.append(listItem);
-    bindTaskEvents(listItem, taskCompleted);
+
+    let task = getNewTask(taskInput.value);
+
+    incompleteTaskHolder.append(task);
+    bindTaskEvents(task, taskCompleted);
     taskInput.value = "";
   }
 }
@@ -55,63 +68,69 @@ function addTask() {
 function editTask() {
 
   let 
-    listItem = this.parentNode,
-    editInput = listItem.querySelector("input[type='text']"),
-    label = listItem.querySelector("label"),
-    editBtn = listItem.querySelector(".edit"),
-    containsClass = listItem.classList.contains("task_edit-mode");
-  //If class of the parent is .task_edit-mode
-  if (containsClass) {
+    task = this.parentNode,
+    taskInput = task.querySelector(".task__input"),
+    taskText = task.querySelector(".task__text"),
+    taskEdit = this,
+    state = taskEdit.classList.contains("task__edit_on");
 
-    //switch to .task_edit-mode
-    //label becomes the inputs value.
-    label.innerText = editInput.value;
-    editBtn.innerText = "Edit";
+  if (state) {
+
+    taskText.innerText = taskInput.value;
+    taskEdit.innerText = "Edit";
   } else {
-    editInput.value = label.innerText;
-    editBtn.innerText = "Save";
+
+    taskInput.value = taskText.innerText;
+    taskEdit.innerText = "Save";
   }
 
-  //toggle .task_edit-mode on the parent.
-  listItem.classList.toggle("task_edit-mode");
+  taskText.classList.toggle("task__text_edit");
+  taskInput.classList.toggle("task__input_hidd");
+  taskEdit.classList.toggle("task__edit_on");
 }
 
 function deleteTask() {
-  console.log("Delete Task...");
+
   let 
     task = this.parentNode,
     taskList = task.parentNode;
-  taskList.removeChild(task);
 
+  taskList.removeChild(task);
 }
+
 function taskCompleted() {
+
   let 
     task = this.parentNode
     taskText = task.querySelector(".task__text");
+
   completedTasksHolder.append(task);
   bindTaskEvents(task, taskIncomplete);
   this.classList.add("task__check_checked");
-  task.classList.remove("task_incomplete");
-  task.classList.add("task_completed");
+  task.classList.toggle("task_completed", "task_incomplete");
   taskText.classList.add("task__text_completed");
 }
+
 function taskIncomplete() {
+
   let 
     task = this.parentNode,
     taskText = task.querySelector(".task__text");
+
   incompleteTaskHolder.append(task);
   bindTaskEvents(task, taskCompleted);
   this.classList.remove("task__check_checked"); 
-  task.classList.remove("task_completed");
-  task.classList.add("task_incomplete");
+  task.classList.toggle("task_completed", "task_incomplete");
   taskText.classList.remove("task__text_completed");
 }
 
 function bindTaskEvents(task, checkBoxEventHandler) {
+
   let 
     checkBox = task.querySelector(".task__check"),
     editButton = task.querySelector(".task__edit"),
     deleteButton = task.querySelector(".task__del");
+
   editButton.onclick = editTask;
   deleteButton.onclick = deleteTask;
   checkBox.onchange = checkBoxEventHandler;
