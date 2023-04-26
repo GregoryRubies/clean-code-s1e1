@@ -62,7 +62,7 @@
 .matrix-descr {
   text-align: right;
 }
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .matrix-descr {
     text-align: center;
   }
