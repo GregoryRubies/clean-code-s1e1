@@ -63,9 +63,11 @@
   text-align: right;
 }
 @media (max-width: 768px) {
+
   .matrix-descr {
     text-align: center;
   }
+  
 }
 .matrix-descr__img {
   width: 100%;
