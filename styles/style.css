@@ -1,7 +1,17 @@
+/*abstract*/
+:root {
+  --main-bg-color: #f8f8f8;
+  --main-text-color: #333333;
+  --input-text-color: #888888;
+  --active-text-color: #3a3a3a;
+  --input-border-color: #dddddd;
+  --input-bg-color: #ffffff;
+  --task-border-color: #eeeeee;
+}
 /*page*/
 .page {
-  background-color: #f8f8f8;
-  color: #333;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
   font-family: Lato, sans-serif;
   display: flex;
   flex-direction: column;
@@ -15,7 +25,7 @@
   background: none;
   outline: none;
   border: none;
-  color: #888;
+  color: var(--input-text-color);
   font-size: 15px;
   width: 60px;
   font-family: Lato, sans-serif;
@@ -23,7 +33,7 @@
 }
 .text-button:hover,
 .text-button:focus {
-  color: #3a3a3a;
+  color: --active-text-color;
 }
 .del-button {
   background: none;
@@ -49,14 +59,14 @@
   line-height: 18px;
   height: 21px;
   padding: 0 9px;
-  border: 1px solid #dDd;
-  background: #FFF;
+  border: 1px solid var(--input-border-color);
+  background: var(--input-bg-color);
   border-radius: 6px;
   font-family: Lato, sans-serif;
-  color: #888;
+  color: var(--input-text-color);
 }
 .text-input:focus {
-  color: #333;
+  color: var(--main-text-color);
 }
 /*matrix description*/
 .matrix-descr {
@@ -77,10 +87,10 @@
 }
 /*tasks*/
 .tasks__title {
-  color: #333;
+  color: var(--main-text-color);
   font-weight: 700;
   font-size: 15px;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid var(--main-text-color);
   padding: 30px 0 10px;
   margin: 0;
   text-transform: uppercase;
@@ -92,7 +102,7 @@
 .task {
   overflow: hidden;
   padding: 20px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--task-border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,7 +123,7 @@
 }
 .task__text_completed {
   text-decoration: line-through;
-  color: #888;
+  color: var(--input-text-color);
 }
 .task__text_edit {
   display: none;
