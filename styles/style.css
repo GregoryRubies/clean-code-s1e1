@@ -1,0 +1,146 @@
+/*abstract*/
+:root {
+  --main-bg-color: #f8f8f8;
+  --main-text-color: #333333;
+  --input-text-color: #888888;
+  --active-text-color: #3a3a3a;
+  --input-border-color: #dddddd;
+  --input-bg-color: #ffffff;
+  --task-border-color: #eeeeee;
+}
+/*page*/
+.page {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  font-family: Lato, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page__item {
+  width: 500px;
+}
+/*abstract*/
+.text-button {
+  background: none;
+  outline: none;
+  border: none;
+  color: var(--input-text-color);
+  font-size: 15px;
+  width: 60px;
+  font-family: Lato, sans-serif;
+  cursor: pointer;
+}
+.text-button:hover,
+.text-button:focus {
+  color: --active-text-color;
+}
+.del-button {
+  background: none;
+  outline: none;
+  border: none;
+  width: 60px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.del-button__img {
+  height: 2em;
+  transform: rotateZ(45deg);
+  transition: transform 200ms ease-in;
+}
+.del-button__img:hover,
+.del-button:focus > .del-button__img {
+  transform: rotateZ(0);
+}
+.text-input {
+  margin: 0;
+  outline: none;
+  font-size: 18px;
+  line-height: 18px;
+  height: 21px;
+  padding: 0 9px;
+  border: 1px solid var(--input-border-color);
+  background: var(--input-bg-color);
+  border-radius: 6px;
+  font-family: Lato, sans-serif;
+  color: var(--input-text-color);
+}
+.text-input:focus {
+  color: var(--main-text-color);
+}
+/*matrix description*/
+.matrix-descr {
+  text-align: right;
+}
+@media (max-width: 768px) {
+
+  .matrix-descr {
+    text-align: center;
+  }
+  
+}
+.matrix-descr__img {
+  width: 100%;
+}
+.matrix-descr__info {
+  font-family: fantasy, cursive;
+}
+/*tasks*/
+.tasks__title {
+  color: var(--main-text-color);
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 2px solid var(--main-text-color);
+  padding: 30px 0 10px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.todo-list {
+  padding-top: 16px;
+}
+/*task*/
+.task {
+  overflow: hidden;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--task-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task_add {
+  border-bottom: none;
+}
+.task__check {
+  margin: 0 10px;
+}
+.task__text {
+  width: 56%;
+  display: inline-block;
+  flex-grow: 1;
+  padding-left: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+.task__text_completed {
+  text-decoration: line-through;
+  color: var(--input-text-color);
+}
+.task__text_edit {
+  display: none;
+}
+.task__input {
+  width: 56%;
+  display: inline-block;
+  flex-grow: 1;
+}
+.task__input_hidd {
+  display: none;
+}
+/*task-list*/
+.task-list {
+  margin: 0;
+  padding: 0;
+}
+.task-list__item {
+  list-style: none;
+}
